@@ -1,1 +1,5 @@
-# test-graph-bicep
+# GK Azure Lighthouse onboarding templates
+The provided ARM-templates will onboard your subscriptions to GK Azure Lighthouse Management. Your GK contact person will provide you with the required information (managedByTenantId, ReaderPrincipalID or ContributorPrincipalID)
+
+## Onboard GK to your subscription with Contributor Role
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FC4A8-CCU-Resources%2Frf-azure-lighthouse-onboarding%2Fmain%2Fgk-lighthouse-contributor.json)
