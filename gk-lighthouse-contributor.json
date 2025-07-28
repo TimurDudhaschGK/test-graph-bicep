@@ -1,0 +1,48 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "appName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the Azure AD App Registration"
+      }
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Graph/applications",
+      "apiVersion": "1.0",
+      "name": "[parameters('appName')]",
+      "properties": {
+        "displayName": "[parameters('appName')]",
+        "requiredResourceAccess": [
+          {
+            "resourceAppId": "00000003-0000-0000-c000-000000000000",
+            "resourceAccess": [
+              {
+                "id": "311a71cc-e848-46a1-bdf8-97ff7156d8e6",
+                "type": "Role"
+              },
+              {
+                "id": "a154be20-db9c-4678-8ab7-66f6cc099a59",
+                "type": "Role"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.Graph/servicePrincipals",
+      "apiVersion": "1.0",
+      "name": "[guid(parameters('appName'))]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Graph/applications', parameters('appName'))]"
+      ],
+      "properties": {
+        "appId": "[reference(resourceId('Microsoft.Graph/applications', parameters('appName'))).appId]"
+      }
+    }
+  ]
+}
